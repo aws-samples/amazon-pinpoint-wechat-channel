@@ -1,0 +1,54 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Amazon Pinpoint WeChat Channel.  This application will deliver Amazon Pinpoint triggered messages to WeChat using wechat-api. Written in Javascript.
+Transform: AWS::Serverless-2016-10-31
+
+Parameters:
+  APPID:
+    Type: String
+    Description: APPID for WeChat Official Account
+  APPSECRET:
+    Type: String
+    Description: APPSECRET for WeChat Official Account
+  TEMPLATEID:
+    Type: String
+    Description: TEMPLATEID for the messages sent by this lambda function
+
+Globals:
+  Function:
+    Timeout: 30
+
+Resources:
+  PinpointWeChatChannelFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: AmazonPinpointWeChatChannel
+      CodeUri: pinpointwechat/
+      Policies:
+        - Statement:
+          - Sid: PinpointPutEvents
+            Effect: Allow
+            Action: mobiletargeting:PutEvents
+            Resource: !Sub arn:${AWS::Partition}:mobiletargeting:${AWS::Region}:${AWS::AccountId}:*
+      Handler: app.lambda_handler
+      Runtime: nodejs12.x
+      Environment:
+        Variables:
+          APP_ID:
+            Ref: APPID
+          APP_SECRET:
+            Ref: APPSECRET
+          TEMPLATE_ID:
+            Ref: TEMPLATEID
+
+  PinpointInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref PinpointWeChatChannelFunction
+      Principal: !Sub pinpoint.${AWS::Region}.amazonaws.com
+      SourceArn: !Sub arn:${AWS::Partition}:mobiletargeting:${AWS::Region}:${AWS::AccountId}:apps/*
+
+Outputs:
+  PinpointWeChatChannelFunction:
+    Description: "A function invoked by an Amazon Pinpoint Campaign or Journey that sends a message to a user through WeChat"
+    Value: !GetAtt PinpointWeChatChannelFunction.Arn

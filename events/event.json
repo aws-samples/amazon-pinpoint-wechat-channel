@@ -1,0 +1,25 @@
+{
+  "Message": {},
+  "ApplicationId": "71b0f21869ac444eb0185d43539b97ea",
+  "CampaignId": "d05f45c89fea4db6b4a15afbc4f8e21f",
+  "TreatmentId": "0",
+  "ActivityId": "61c89db9ba0a47e195c7442e2aaa022c",
+  "Endpoints": {
+    "weChatEndpoint-1": {
+      "ChannelType": "CUSTOM",
+      "Address": "oyr2L1k0VxhnbhQsuc6jUZ_n6v4A",
+      "EndpointStatus": "ACTIVE",
+      "OptOut": "NONE",
+      "User": {
+        "UserId": "luxingy",
+        "UserAttributes": {
+            "FirstName": ["Xingyu"],
+            "TeamName": ["Pinpoint"],
+            "TeamUrl": ["https://aws.amazon.com/pinpoint"]
+        }
+      },
+      "CreationDate": "2020-05-15T19:20:13.620Z",
+      "EffectiveDate": "2020-05-15T20:20:13.620Z"
+    }
+  }
+}
