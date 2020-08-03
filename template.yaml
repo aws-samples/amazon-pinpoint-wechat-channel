@@ -15,7 +15,20 @@ Parameters:
 
 Globals:
   Function:
-    Timeout: 30
+    Timeout: 180
+
+Metadata:
+  AWS::ServerlessRepo::Application:
+    Name: amazon-pinpoint-wechat-channel
+    Description: Amazon Pinpoint WeChat Channel.  This application will deliver Amazon Pinpoint triggered messages to WeChat.
+    Author: Amazon Pinpoint
+    SpdxLicenseId: MIT-0
+    LicenseUrl: LICENSE
+    ReadmeUrl: README.md
+    Labels: ['amazon-pinpoint', 'pinpoint', 'custom-channel', 'wechat', 'nodejs']
+    HomePageUrl: https://aws.amazon.com/pinpoint
+    SemanticVersion: 1.0.0
+    SourceCodeUrl: https://github.com/aws-samples/amazon-pinpoint-wechat-channel
 
 Resources:
   PinpointWeChatChannelFunction:
